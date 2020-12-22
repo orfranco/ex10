@@ -13,6 +13,13 @@ class GameRunner:
         self.__screen_max_y = Screen.SCREEN_MAX_Y
         self.__screen_min_x = Screen.SCREEN_MIN_X
         self.__screen_min_y = Screen.SCREEN_MIN_Y
+        # TODO:
+        #  - add list(?) of asteroids with length = asteroids_amount
+        #       and register each one using
+        #       __screen.register_asteroid(asteroid, asteroid_size).
+        #  - initialize ship with random coords
+        #       and draw it using __screen.draw_ship(x,y,heading).
+        #  - add user score (as a class variable?)
 
     def run(self):
         self._do_loop()
