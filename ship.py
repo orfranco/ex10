@@ -30,12 +30,13 @@ class Ship:
         """
         pass
 
-    def set_heading(self):
+    def set_heading(self, angle):
         """
         TODO ?
         :return:
         """
-        pass
+        # TODO: add validation using exceptions
+        self.heading += angle
 
     def set_x(self, x):
         self.x = x

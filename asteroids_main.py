@@ -7,6 +7,8 @@ import random
 
 
 DEFAULT_ASTEROIDS_NUM = 5
+ROTATE_LEFT = 7
+ROTATE_RIGHT = -7
 
 
 class GameRunner:
@@ -26,6 +28,10 @@ class GameRunner:
         #  - add user score (as a class variable?)
 
     def __add_ship(self):
+        """
+        TODO
+        :return:
+        """
         ship_x_cord = random.randint(self.__screen_min_x, self.__screen_max_x)
         ship_y_cord = random.randint(self.__screen_min_y, self.__screen_max_y)
         self.ship = Ship(ship_x_cord, ship_y_cord)
@@ -43,8 +49,11 @@ class GameRunner:
         self.__screen.ontimer(self._do_loop, 5)
 
     def _game_loop(self):
-        # TODO: Your code goes here
-        pass
+        # change ship direction:
+        if self.__screen.is_left_pressed():
+            self.ship.set_heading(ROTATE_LEFT)
+        elif self.__screen.is_right_pressed():
+            self.ship.set_heading(ROTATE_RIGHT)
 
     def move_obj(self, obj):
         delta_x = self.__screen_max_x - self.__screen_min_x
