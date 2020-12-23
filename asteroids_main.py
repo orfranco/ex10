@@ -258,7 +258,6 @@ class GameRunner:
         """
         This function moves (accelerates and rotates) the ship
         according to the user key strokes.
-        :return:
         """
         if self.__screen.is_up_pressed():
             self._accelerate_ship()
@@ -276,13 +275,16 @@ class GameRunner:
 
     def _accelerate_ship(self):
         """
-
-        :return:
+        this function accelerates the speed of the ship on the current
+        direction with the given formula.
         """
+        # calculating the new x-axis speed and the y-axis coordinate:
         cos_heading = math.cos(math.radians(self.ship.get_heading()))
         sin_heading = math.sin(math.radians(self.ship.get_heading()))
         new_speed_x = self.ship.get_speed_x() + cos_heading
         new_speed_y = self.ship.get_speed_y() + sin_heading
+
+        # updates the ship speeds with the new x and y speeds:
         self.ship.set_speed_x(new_speed_x)
         self.ship.set_speed_y(new_speed_y)
 
@@ -292,14 +294,15 @@ class GameRunner:
         according to the given formula.
         :param obj: a moving object in the game (asteroid/ship/torpedo).
         """
-        # calculating the new x coordinate and y coordinate
+        # calculating the new x coordinate and y coordinate:
         delta_x = self.__screen_max_x - self.__screen_min_x
         new_spot_x = self.__screen_min_x + (obj.get_x() + obj.get_speed_x()
                                             - self.__screen_min_x) % delta_x
         delta_y = self.__screen_max_y - self.__screen_min_y
         new_spot_y = self.__screen_min_y + (obj.get_y() + obj.get_speed_y()
                                             - self.__screen_min_y) % delta_y
-        # update the object coordinates with the new coordinates
+
+        # updates the object coordinates with the new coordinates:
         obj.set_x(new_spot_x)
         obj.set_y(new_spot_y)
 
