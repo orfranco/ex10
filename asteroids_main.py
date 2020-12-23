@@ -48,22 +48,26 @@ class GameRunner:
         self.__screen.ontimer(self._do_loop, 5)
 
     def _game_loop(self):
-        self.__ship_handler()
+        self._ship_handler()
 
-    def __ship_handler(self):
+    def _ship_handler(self):
+        """
+
+        :return:
+        """
         # move_ship according to keys pressed
         if self.__screen.is_up_pressed():
-            self.accelerate_ship()
+            self._accelerate_ship()
         if self.__screen.is_left_pressed():
             self.ship.set_heading(ROTATE_LEFT)
         if self.__screen.is_right_pressed():
             self.ship.set_heading(ROTATE_RIGHT)
-        self.move_obj(self.ship)
+        self._move_obj(self.ship)
         self.__screen.draw_ship(int(self.ship.get_x()),
                                 int(self.ship.get_y()),
                                 self.ship.get_heading())
 
-    def accelerate_ship(self):
+    def _accelerate_ship(self):
         """
 
         :return:
@@ -75,7 +79,7 @@ class GameRunner:
         self.ship.set_speed_x(new_speed_x)
         self.ship.set_speed_y(new_speed_y)
 
-    def move_obj(self, obj):
+    def _move_obj(self, obj):
         """
 
         :param obj:
