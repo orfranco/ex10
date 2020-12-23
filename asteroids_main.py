@@ -9,6 +9,7 @@ import math
 DEFAULT_ASTEROIDS_NUM = 5
 ROTATE_LEFT = 7
 ROTATE_RIGHT = -7
+ASTEROID_ALLOWED_SPEEDS = (-4, -3, -2, -1, 1, 2, 3, 4)
 
 
 class GameRunner:
@@ -21,11 +22,25 @@ class GameRunner:
         self.__screen_min_x = Screen.SCREEN_MIN_X
         self.__screen_min_y = Screen.SCREEN_MIN_Y
         self._add_ship()
+        self._add_asteroids(asteroids_amount)
         # TODO:
-        #  - add list(?) of asteroids with length = asteroids_amount
-        #       and register each one using
-        #       __screen.register_asteroid(asteroid, asteroid_size).
         #  - add user score (as a class variable?)
+
+    def _add_asteroids(self, asteroids_amount):
+        """
+        TODO
+        :param asteroids_amount:
+        :return:
+        """
+        self.__asteroids = []
+        for i in range(asteroids_amount):
+            ast_x = random.randint(self.__screen_min_x, self.__screen_max_x)
+            ast_y = random.randint(self.__screen_min_y, self.__screen_max_y)
+            ast_speed_x = random.choice(ASTEROID_ALLOWED_SPEEDS)
+            ast_speed_y = random.choice(ASTEROID_ALLOWED_SPEEDS)
+            asteroid = Asteroid(ast_x, ast_y, ast_speed_x, ast_speed_y)
+            self.__asteroids.append(asteroid)
+            self.__screen.register_asteroid(asteroid, asteroid.get_size())
 
     def _add_ship(self):
         """
@@ -54,6 +69,7 @@ class GameRunner:
     def _asteroid_handler(self):
         for asteroid in self.__asteroids:
             self._move_obj(asteroid)
+            self.__screen.draw_asteroid(asteroid, asteroid.get_x(), asteroid.get_y())
             intersected_obj = self._check_intersection(asteroid)
             for obj in intersected_obj:
                 pass
@@ -63,7 +79,6 @@ class GameRunner:
         if asteroid.has_intersection(self.ship):
             intersected_obj.append(self.ship)
         return intersected_obj
-
 
     def _ship_handler(self):
         """
