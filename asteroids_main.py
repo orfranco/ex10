@@ -20,14 +20,14 @@ class GameRunner:
         self.__screen_max_y = Screen.SCREEN_MAX_Y
         self.__screen_min_x = Screen.SCREEN_MIN_X
         self.__screen_min_y = Screen.SCREEN_MIN_Y
-        self.__add_ship()
+        self._add_ship()
         # TODO:
         #  - add list(?) of asteroids with length = asteroids_amount
         #       and register each one using
         #       __screen.register_asteroid(asteroid, asteroid_size).
         #  - add user score (as a class variable?)
 
-    def __add_ship(self):
+    def _add_ship(self):
         """
         TODO
         :return:
