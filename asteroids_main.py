@@ -70,15 +70,9 @@ class GameRunner:
         for asteroid in self.__asteroids:
             self._move_obj(asteroid)
             self.__screen.draw_asteroid(asteroid, asteroid.get_x(), asteroid.get_y())
-            intersected_obj = self._check_intersection(asteroid)
-            for obj in intersected_obj:
+            if asteroid.has_intersection(self.ship):
                 pass
 
-    def _check_intersection(self, asteroid):
-        intersected_obj = []
-        if asteroid.has_intersection(self.ship):
-            intersected_obj.append(self.ship)
-        return intersected_obj
 
     def _ship_handler(self):
         """
