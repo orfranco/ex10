@@ -15,6 +15,11 @@ DAMAGE_MESSAGE = "Ouch !!"
 DAMAGE_TITLE = "Damage"
 TORPEDO_LIFETIME_REDUCER = 1
 TORPEDOS_LIMIT = 10
+SHIP_WRECKED_MSG = "You are dead!!"
+NO_MORE_ASTEROIDS_MSG = "You have Won!"
+QUIT_PRESSED_MSG = "Quitting is for quitters..."
+END_TITLE = "BYE"
+
 
 class GameRunner:
 
@@ -27,7 +32,7 @@ class GameRunner:
         self.__screen_min_y = Screen.SCREEN_MIN_Y
         self._add_ship()
         self._add_asteroids(asteroids_amount)
-        self.__torpedos =[]
+        self.__torpedos = []
         self.__score = 0
 
     def _add_asteroids(self, asteroids_amount):
@@ -70,6 +75,25 @@ class GameRunner:
         self._ship_handler()
         self._torpedo_handler()
         self._asteroid_handler()
+        self._is_game_over()
+
+    def _is_game_over(self):
+        # check if the ship life is 0:
+        game_over = False
+        if not self.ship.get_health():
+            game_over = True
+            msg = SHIP_WRECKED_MSG
+        elif not self.__asteroids:
+            game_over = True
+            msg = NO_MORE_ASTEROIDS_MSG
+        elif self.__screen.should_end():
+            game_over = True
+            msg = QUIT_PRESSED_MSG
+        
+        if game_over:
+            self.__screen.show_message(END_TITLE, msg)
+            self.__screen.end_game()
+            sys.exit()
 
     def _torpedo_handler(self):
         # TODO : leyafyef
@@ -162,9 +186,7 @@ class GameRunner:
                                 int(self.ship.get_y()),
                                 self.ship.get_heading())
 
-        # check if the ship life is 0:
-        if not self.ship.get_health():
-            pass  # TODO
+
 
     def _accelerate_ship(self):
         """
