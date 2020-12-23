@@ -38,3 +38,6 @@ class Torpedo:
 
     def get_speed_y(self):
         return self.speed_y
+
+    def get_heading(self):
+        return self.heading

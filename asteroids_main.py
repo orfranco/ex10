@@ -71,20 +71,27 @@ class GameRunner:
 
     def _torpedo_handler(self):
         if self.__screen.is_space_pressed():
-            torpedo = Torpedo(self.ship.)
+            pass
+        for torpedo in self.__torpedos:
+            self._move_obj(torpedo)
+            self.__screen.draw_torpedo(torpedo, torpedo.get_x(),
+                                       torpedo.get_y(), torpedo.get_heading())
 
 
     def _asteroid_handler(self):
         for asteroid in self.__asteroids:
             self._move_obj(asteroid)
-            self.__screen.draw_asteroid(asteroid, asteroid.get_x(), asteroid.get_y())
+            self.__screen.draw_asteroid(asteroid, asteroid.get_x(),
+                                        asteroid.get_y())
             if asteroid.has_intersection(self.ship):
                 self.__screen.show_message(DAMAGE_TITLE, DAMAGE_MESSAGE)
                 self.ship.take_damage(ASTEROID_DAMAGE)
                 self.__screen.remove_life()
                 self.__screen.unregister_asteroid(asteroid)
                 self.__asteroids.remove(asteroid)
-
+            # for torpedo in self.__torpedos:
+            #     if asteroid.has_intersection(torpedo):
+            #         torpedo_asteroid_intersection()
         if not self.ship.get_health():
             pass  # TODO
 
