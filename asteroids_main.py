@@ -149,8 +149,9 @@ class GameRunner:
         # Handle every torpedo currently in the game:
         for torpedo in self.__torpedos:
             self._move_obj(torpedo)
-            self.__screen.draw_torpedo(torpedo, torpedo.get_x(),
-                                       torpedo.get_y(), torpedo.get_heading())
+            self.__screen.draw_torpedo(torpedo, int(torpedo.get_x()),
+                                       int(torpedo.get_y()),
+                                       torpedo.get_heading())
             torpedo.reduce_life_time(TORPEDO_LIFETIME_REDUCER)
 
             # Remove torpedos after their lifetime is over:
@@ -182,8 +183,8 @@ class GameRunner:
         """
         for asteroid in self.__asteroids:
             self._move_obj(asteroid)
-            self.__screen.draw_asteroid(asteroid, asteroid.get_x(),
-                                        asteroid.get_y())
+            self.__screen.draw_asteroid(asteroid, int(asteroid.get_x()),
+                                        int(asteroid.get_y()))
 
             # In case the asteroid was hit by the ship:
             if asteroid.has_intersection(self.ship):
