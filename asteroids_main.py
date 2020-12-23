@@ -49,6 +49,21 @@ class GameRunner:
 
     def _game_loop(self):
         self._ship_handler()
+        self._asteroid_handler()
+
+    def _asteroid_handler(self):
+        for asteroid in self.__asteroids:
+            self._move_obj(asteroid)
+            intersected_obj = self._check_intersection(asteroid)
+            for obj in intersected_obj:
+                pass
+
+    def _check_intersection(self, asteroid):
+        intersected_obj = []
+        if asteroid.has_intersection(self.ship):
+            intersected_obj.append(self.ship)
+        return intersected_obj
+
 
     def _ship_handler(self):
         """

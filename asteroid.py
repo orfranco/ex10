@@ -1,4 +1,5 @@
 
+import math
 
 class Asteroid:
     def __init__(self, x, y, speed_x, speed_y, size=3):
@@ -16,9 +17,10 @@ class Asteroid:
         self.size = size
 
     def has_intersection(self, obj):
-        # TODO: do
-        pass
+        distance = math.sqrt((obj.get_x() - self.x)**2 +
+                             (obj.get_y() - self.y)**2)
 
+        return distance <= self.get_radius() + obj.get_radius()
     def get_radius(self):
         """
         TODO
