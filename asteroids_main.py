@@ -1,3 +1,8 @@
+##############################################################################
+# FILE: asteroids_main.py
+# EXERCISE: intro2cs1 ex10 2020
+# DESCRIPTION: The main module for an Asteroids game.
+##############################################################################
 from screen import Screen
 from ship import Ship
 from asteroid import Asteroid
@@ -137,12 +142,14 @@ class GameRunner:
         """
         if self.__screen.is_space_pressed() and \
                 len(self.__torpedos) < TORPEDOS_LIMIT:
+
             # Create a torpedo and add it to the game:
             torpedo_speed_x, torpedo_speed_y = self.calc_torpedo_speeds()
             torpedo = Torpedo(self.ship.get_x(), self.ship.get_y(),
                               self.ship.get_heading(),
                               torpedo_speed_x, torpedo_speed_y)
             self.__torpedos.append(torpedo)
+
             # Register the torpedo to the screen:
             self.__screen.register_torpedo(torpedo)
 
@@ -310,13 +317,15 @@ class GameRunner:
 def asteroids_speed_after_split(asteroid: Asteroid, torpedo: Torpedo) -> \
                                                         Tuple[float, float]:
     """
-    TODO
-    :param asteroid:
-    :param torpedo:
-    :return:
+    This function calculates the appropriate speeds (in 2 axis) for the new
+    asteroids that are created by splitting an asteroid.
+    :param asteroid: The original asteroid (that needs to be split).
+    :param torpedo: The torpedo which hit the asteroid.
+    :return: A tuple with the speed for the new asteroids (speed_x, speed_y)
     """
     old_speed_x, old_speed_y = asteroid.get_speed_x(), asteroid.get_speed_y()
     old_speeds_root = math.sqrt((old_speed_x ** 2) + (old_speed_y ** 2))
+
     new_speed_x = (torpedo.get_speed_x() + old_speed_x) / old_speeds_root
     new_speed_y = (torpedo.get_speed_y() + old_speed_y) / old_speeds_root
 

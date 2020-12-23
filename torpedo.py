@@ -1,4 +1,10 @@
+##############################################################################
+# FILE: ship.py
+# EXERCISE: intro2cs1 ex10 2020
+# DESCRIPTION: A Torpedo class for an Asteroids game.
+##############################################################################
 
+# Constants
 TORPEDO_START_LIFE = 200
 
 

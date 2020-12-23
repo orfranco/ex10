@@ -1,3 +1,8 @@
+##############################################################################
+# FILE: asteroid.py
+# EXERCISE: intro2cs1 ex10 2020
+# DESCRIPTION: An Asteroid class for an Asteroids game.
+##############################################################################
 from typing import Any
 import math
 

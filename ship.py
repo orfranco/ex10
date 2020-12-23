@@ -1,4 +1,10 @@
+##############################################################################
+# FILE: ship.py
+# EXERCISE: intro2cs1 ex10 2020
+# DESCRIPTION: A Ship class for an Asteroids game.
+##############################################################################
 
+# Constants:
 SHIP_START_HEALTH = 3
 
 
