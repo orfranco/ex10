@@ -10,6 +10,9 @@ DEFAULT_ASTEROIDS_NUM = 5
 ROTATE_LEFT = 7
 ROTATE_RIGHT = -7
 ASTEROID_ALLOWED_SPEEDS = (-4, -3, -2, -1, 1, 2, 3, 4)
+ASTEROID_DAMAGE = 1
+DAMAGE_MESSAGE = "Ouch !!"
+DAMAGE_TITLE = "Damage"
 
 
 class GameRunner:
@@ -23,8 +26,7 @@ class GameRunner:
         self.__screen_min_y = Screen.SCREEN_MIN_Y
         self._add_ship()
         self._add_asteroids(asteroids_amount)
-        # TODO:
-        #  - add user score (as a class variable?)
+        self.__score = 0
 
     def _add_asteroids(self, asteroids_amount):
         """
@@ -71,9 +73,14 @@ class GameRunner:
             self._move_obj(asteroid)
             self.__screen.draw_asteroid(asteroid, asteroid.get_x(), asteroid.get_y())
             if asteroid.has_intersection(self.ship):
+                self.__screen.show_message(DAMAGE_TITLE, DAMAGE_MESSAGE)
+                self.ship.take_damage(ASTEROID_DAMAGE)
+                self.__screen.remove_life()
                 self.__screen.unregister_asteroid(asteroid)
                 self.__asteroids.remove(asteroid)
 
+        if not self.ship.get_health():
+            pass  # TODO
 
     def _ship_handler(self):
         """

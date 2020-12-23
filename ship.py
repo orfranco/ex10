@@ -1,4 +1,6 @@
 
+SHIP_START_HEALTH = 3
+
 
 class Ship:
     RADIUS = 1
@@ -16,6 +18,7 @@ class Ship:
         self.x, self.y = x, y
         self.speed_x, self.speed_y = speed_x, speed_y
         self.heading = heading
+        self.health = SHIP_START_HEALTH
 
     def get_radius(self):
         """
@@ -60,7 +63,31 @@ class Ship:
         return self.speed_y
 
     def set_speed_x(self, speed_x):
+        """
+        TODO
+        :param speed_x:
+        :return:
+        """
         self.speed_x = speed_x
 
     def set_speed_y(self, speed_y):
+        """
+        TODO
+        :param speed_y:
+        :return:
+        """
         self.speed_y = speed_y
+
+    def get_health(self):
+        """
+        TODO
+        :return:
+        """
+        return self.health
+
+    def take_damage(self, damage):
+        """
+
+        :return:
+        """
+        self.health -= damage
