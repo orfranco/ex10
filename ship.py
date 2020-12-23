@@ -19,7 +19,7 @@ class Ship:
 
     def get_radius(self):
         """
-        :return: The radius of the ship (=1).
+        :return: The radius of the ship.
         """
         return self.RADIUS
 

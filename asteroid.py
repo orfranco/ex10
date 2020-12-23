@@ -3,7 +3,7 @@
 class Asteroid:
     def __init__(self, x, y, speed_x, speed_y, size=3):
         """
-        The constructor of the Ship class.
+        The constructor of the Asteroid class.
         TODO: finish
         :param x:
         :param y:

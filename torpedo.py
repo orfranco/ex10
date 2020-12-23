@@ -6,7 +6,7 @@ class Torpedo:
 
     def __init__(self, x, y, heading, speed_x, speed_y):
         """
-        The constructor of the Ship class.
+        The constructor of the Torpedo class.
         TODO: finish
         :param x:
         :param y:
