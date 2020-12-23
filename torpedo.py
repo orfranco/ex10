@@ -1,8 +1,8 @@
 
+TORPEDO_START_LIFE = 200
 
 class Torpedo:
     RADIUS = 4
-    TORPEDO_LIFE = 200
 
     def __init__(self, x, y, heading, speed_x, speed_y):
         """
@@ -17,6 +17,7 @@ class Torpedo:
         self.x, self.y = x, y
         self.speed_x, self.speed_y = speed_x, speed_y
         self.heading = heading
+        self.life_time = TORPEDO_START_LIFE
 
     def get_radius(self):
         return self.RADIUS
@@ -41,3 +42,9 @@ class Torpedo:
 
     def get_heading(self):
         return self.heading
+
+    def get_life_time(self):
+        return self.life_time
+
+    def reduce_life_time(self, amount):
+        self.life_time -= amount

@@ -13,7 +13,8 @@ ASTEROID_ALLOWED_SPEEDS = (-4, -3, -2, -1, 1, 2, 3, 4)
 ASTEROID_DAMAGE = 1
 DAMAGE_MESSAGE = "Ouch !!"
 DAMAGE_TITLE = "Damage"
-
+TORPEDO_LIFETIME_REDUCER = 1
+TORPEDOS_LIMIT = 10
 
 class GameRunner:
 
@@ -67,11 +68,12 @@ class GameRunner:
 
     def _game_loop(self):
         self._ship_handler()
-        self._asteroid_handler()
         self._torpedo_handler()
+        self._asteroid_handler()
 
     def _torpedo_handler(self):
-        if self.__screen.is_space_pressed():
+        # TODO : leyafyef
+        if self.__screen.is_space_pressed() and len(self.__torpedos) < TORPEDOS_LIMIT:
             torpedo_speed_x = self.ship.get_speed_x() + (2 * math.cos(math.radians(self.ship.get_heading())))
             torpedo_speed_y = self.ship.get_speed_y() + (2 * math.sin(math.radians(self.ship.get_heading())))
             torpedo = Torpedo(self.ship.get_x(), self.ship.get_y(), self.ship.get_heading(), torpedo_speed_x, torpedo_speed_y)
@@ -82,6 +84,11 @@ class GameRunner:
             self._move_obj(torpedo)
             self.__screen.draw_torpedo(torpedo, torpedo.get_x(),
                                        torpedo.get_y(), torpedo.get_heading())
+            torpedo.reduce_life_time(TORPEDO_LIFETIME_REDUCER)
+            if not torpedo.get_life_time():
+                self.__screen.unregister_torpedo(torpedo)
+                self.__torpedos.remove(torpedo)
+
 
     def _asteroid_handler(self):
         for asteroid in self.__asteroids:
@@ -94,11 +101,23 @@ class GameRunner:
                 self.__screen.remove_life()
                 self.__screen.unregister_asteroid(asteroid)
                 self.__asteroids.remove(asteroid)
-            # for torpedo in self.__torpedos:
-            #     if asteroid.has_intersection(torpedo):
-            #         self._split_asteroid(asteroid)
-        if not self.ship.get_health():
-            pass  # TODO
+
+            for torpedo in self.__torpedos:
+                if asteroid.has_intersection(torpedo):
+                    self._split_asteroid(asteroid)
+                    self.__torpedos.remove(torpedo)
+                    self.__screen.unregister_torpedo(torpedo)
+                    self._increase_usr_points(asteroid.get_size())
+
+    def _increase_usr_points(self, asteroid_size):
+        if asteroid_size == 3:
+            self.__score += 20
+        elif asteroid_size == 2:
+            self.__score += 50
+        elif asteroid_size == 1:
+            self.__score += 100
+
+        self.__screen.set_score(self.__score)
 
     def _split_asteroid(self, asteroid):
         pass
@@ -119,6 +138,10 @@ class GameRunner:
         self.__screen.draw_ship(int(self.ship.get_x()),
                                 int(self.ship.get_y()),
                                 self.ship.get_heading())
+
+        # check if the ship life is 0.
+        if not self.ship.get_health():
+            pass  # TODO
 
     def _accelerate_ship(self):
         """
