@@ -26,6 +26,7 @@ class GameRunner:
         self.__screen_min_y = Screen.SCREEN_MIN_Y
         self._add_ship()
         self._add_asteroids(asteroids_amount)
+        self.__torpedos =[]
         self.__score = 0
 
     def _add_asteroids(self, asteroids_amount):
@@ -67,6 +68,11 @@ class GameRunner:
     def _game_loop(self):
         self._ship_handler()
         self._asteroid_handler()
+
+    def _torpedo_handler(self):
+        if self.__screen.is_space_pressed():
+            torpedo = Torpedo(self.ship.)
+
 
     def _asteroid_handler(self):
         for asteroid in self.__asteroids:
