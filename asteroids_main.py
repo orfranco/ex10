@@ -71,7 +71,8 @@ class GameRunner:
             self._move_obj(asteroid)
             self.__screen.draw_asteroid(asteroid, asteroid.get_x(), asteroid.get_y())
             if asteroid.has_intersection(self.ship):
-                pass
+                self.__screen.unregister_asteroid(asteroid)
+                self.__asteroids.remove(asteroid)
 
 
     def _ship_handler(self):
