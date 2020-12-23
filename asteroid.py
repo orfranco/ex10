@@ -9,7 +9,7 @@ import math
 
 class Asteroid:
     """
-    TODO: add class docstring.
+    This is a class of Asteroid objects for games.
     """
     def __init__(self, x: float, y: float, speed_x: float,
                  speed_y: float, size: int = 3):

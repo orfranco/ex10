@@ -10,7 +10,7 @@ SHIP_START_HEALTH = 3
 
 class Ship:
     """
-    TODO: add class docstring.
+    This is a class of Ship objects for games.
     """
     RADIUS = 1
 

@@ -10,7 +10,7 @@ TORPEDO_START_LIFE = 200
 
 class Torpedo:
     """
-    TODO: add class docstring.
+    This is a class of Torpedo objects for games.
     """
     RADIUS = 4
 
