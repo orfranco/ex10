@@ -333,7 +333,7 @@ class Screen:
 
     def draw_asteroid(self, asteroid, x, y):
         """
-        Draw the given asteroid on the specified (x,y) coordinates
+        Draw the given asteroid on the specified (__x,__y) coordinates
 
         :param asteroid: This is your asteroid object (remember to register it before)
         :type asteroid: Asteroid
@@ -353,7 +353,7 @@ class Screen:
 
     def draw_torpedo(self, torpedo, x, y, heading):
         """
-        Draw the given torpedo on the specified (x,y) coordinates with the given heading
+        Draw the given torpedo on the specified (__x,__y) coordinates with the given heading
 
         :param asteroid: This is your torpedo object (remember to register it before)
         :type asteroid: Torpedo

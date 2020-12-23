@@ -1250,7 +1250,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			}
 
 			// Opera 10-11 does not throw on post-comma invalid pseudos
-			div.querySelectorAll("*,:x");
+			div.querySelectorAll("*,:__x");
 			rbuggyQSA.push(",.*:");
 		});
 	}
@@ -1268,7 +1268,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 
 			// This should fail with an exception
 			// Gecko does not error, returns false instead
-			matches.call( div, "[s!='']:x" );
+			matches.call( div, "[s!='']:__x" );
 			rbuggyMatches.push( "!=", pseudos );
 		});
 	}
@@ -1580,11 +1580,11 @@ Expr = Sizzle.selectors = {
 				1 type (only|nth|...)
 				2 what (child|of-type)
 				3 argument (even|odd|\d*|\d*n([+-]\d+)?|...)
-				4 xn-component of xn+y argument ([+-]?\d*n|)
+				4 xn-component of xn+__y argument ([+-]?\d*n|)
 				5 sign of xn-component
-				6 x of xn-component
-				7 sign of y-component
-				8 y of y-component
+				6 __x of xn-component
+				7 sign of __y-component
+				8 __y of __y-component
 			*/
 			match[1] = match[1].toLowerCase();
 
@@ -1594,7 +1594,7 @@ Expr = Sizzle.selectors = {
 					Sizzle.error( match[0] );
 				}
 
-				// numeric x and y parameters for Expr.filter.CHILD
+				// numeric __x and __y parameters for Expr.filter.CHILD
 				// remember that false/true cast respectively to 0/1
 				match[4] = +( match[4] ? match[5] + (match[6] || 1) : 2 * ( match[3] === "even" || match[3] === "odd" ) );
 				match[5] = +( ( match[7] + match[8] ) || match[3] === "odd" );
@@ -4190,14 +4190,14 @@ var rcheckableType = (/^(?:checkbox|radio)$/i);
 
 	// Make sure textarea (and checkbox) defaultValue is properly cloned
 	// Support: IE6-IE11+
-	div.innerHTML = "<textarea>x</textarea>";
+	div.innerHTML = "<textarea>__x</textarea>";
 	support.noCloneChecked = !!div.cloneNode( true ).lastChild.defaultValue;
 
 	// #11217 - WebKit loses check when the name is after the checked attribute
 	fragment.appendChild( div );
 	div.innerHTML = "<input type='radio' checked='checked' name='t'/>";
 
-	// Support: Safari 5.1, iOS 5.1, Android 4.x, Android 2.3
+	// Support: Safari 5.1, iOS 5.1, Android 4.__x, Android 2.3
 	// old WebKit doesn't clone checked state correctly in fragments
 	support.checkClone = div.cloneNode( true ).cloneNode( true ).lastChild.checked;
 
@@ -8834,7 +8834,7 @@ jQuery.extend({
 		global: true,
 		processData: true,
 		async: true,
-		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		contentType: "application/__x-www-form-urlencoded; charset=UTF-8",
 		/*
 		timeout: 0,
 		data: null,
@@ -9728,7 +9728,7 @@ function createActiveXHR() {
 // Install script dataType
 jQuery.ajaxSetup({
 	accepts: {
-		script: "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript"
+		script: "text/javascript, application/javascript, application/ecmascript, application/__x-ecmascript"
 	},
 	contents: {
 		script: /(?:java|ecma)script/
@@ -9834,7 +9834,7 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 	var callbackName, overwritten, responseContainer,
 		jsonProp = s.jsonp !== false && ( rjsonp.test( s.url ) ?
 			"url" :
-			typeof s.data === "string" && !( s.contentType || "" ).indexOf("application/x-www-form-urlencoded") && rjsonp.test( s.data ) && "data"
+			typeof s.data === "string" && !( s.contentType || "" ).indexOf("application/__x-www-form-urlencoded") && rjsonp.test( s.data ) && "data"
 		);
 
 	// Handle iff the expected data type is "jsonp" or we have a parameter to set

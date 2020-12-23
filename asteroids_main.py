@@ -200,25 +200,22 @@ class GameRunner:
         self.ship.set_speed_x(new_speed_x)
         self.ship.set_speed_y(new_speed_y)
 
-    def _move_obj(self, obj):
+    def _move_obj(self, obj: Any):
         """
-
-        :param obj:
-        :return:
+        this function moves a given game object (asteroid/ship/torpedo)
+        according to the given formula.
+        :param obj: a moving object in the game (asteroid/ship/torpedo).
         """
+        # calculating the new x coordinate and y coordinate
         delta_x = self.__screen_max_x - self.__screen_min_x
         new_spot_x = self.__screen_min_x + (obj.get_x() + obj.get_speed_x()
                                             - self.__screen_min_x) % delta_x
         delta_y = self.__screen_max_y - self.__screen_min_y
         new_spot_y = self.__screen_min_y + (obj.get_y() + obj.get_speed_y()
                                             - self.__screen_min_y) % delta_y
+        # update the object coordinates with the new coordinates
         obj.set_x(new_spot_x)
         obj.set_y(new_spot_y)
-
-
-def main(amount):
-    runner = GameRunner(amount)
-    runner.run()
 
 
 def asteroids_speed_after_split(asteroid, torpedo):
@@ -234,6 +231,10 @@ def asteroids_speed_after_split(asteroid, torpedo):
     new_speed_y = (torpedo.get_speed_y() + old_speed_y) / old_speeds_root
 
     return new_speed_x, new_speed_y
+
+def main(amount):
+    runner = GameRunner(amount)
+    runner.run()
 
 
 if __name__ == "__main__":

@@ -1,62 +1,85 @@
-
+from typing import Any
 import math
 
 
 class Asteroid:
-    def __init__(self, x, y, speed_x, speed_y, size=3):
+    """
+    TODO: add class docstring.
+    """
+    def __init__(self, x: float, y: float, speed_x: float,
+                 speed_y: float, size: int = 3):
         """
         The constructor of the Asteroid class.
-        TODO: finish
-        :param x:
-        :param y:
+        :param x: the x coordinate of the starting point
+        :param y: the y coordinate of the starting point
+        :param speed_x: the speed of the asteroid on the x-axis.
+        :param speed_y: the speed of the asteroid on the y-axis.
         :param size: an int between 1 and 3
-        :param speed_x:
-        :param speed_y:
         """
         self.__x, self.__y = x, y
         self.__speed_x, self.__speed_y = speed_x, speed_y
         self.__size = size
 
-    def has_intersection(self, obj):
-        distance = math.sqrt((obj.get_x() - self.__x)**2 +
-                             (obj.get_y() - self.__y)**2)
-
+    def has_intersection(self, obj: Any) -> bool:
+        """
+        this function checks if the asteroid intersected with the object
+        given as an argument.
+        :param obj: an object of the game.
+        :return: True if the asteroid intersected with the object, False else.
+        """
+        distance = math.sqrt((obj.get_x() - self.__x)**2
+                             + (obj.get_y() - self.__y)**2)
+        # finds the distance between the object and the asteroid, and compare
+        # it to the sum of their radius
+        # (representing the intersection distance)
         return distance <= self.get_radius() + obj.get_radius()
 
-    def get_radius(self):
+    def get_radius(self) -> int:
         """
-        TODO
-        :return:
+        :return: the radius of the asteroid (calculated by the given formula).
         """
         return (self.__size * 10) - 5
 
-    def set_x(self, x):
+    def set_x(self, x: float):
         """
-
-        :param x:
-        :return:
+        this function updating the x coordinate of the asteroid.
+        :param x: the new x coordinate.
         """
         self.__x = x
 
-    def set_y(self, y):
+    def set_y(self, y: float):
         """
-
-        :param y:
-        :return:
+        this function updating the y coordinate of the asteroid.
+        :param y: the new y coordinate.
         """
         self.__y = y
 
-    def get_x(self):
+    def get_x(self) -> float:
+        """
+        this function returns the current x coordinate of the asteroid.
+        """
         return self.__x
 
-    def get_y(self):
+    def get_y(self) -> float:
+        """
+        this function returns the current y coordinate of the asteroid.
+        """
         return self.__y
 
-    def get_speed_x(self):
+    def get_speed_x(self) -> float:
+        """
+        this function returns the current speed of the asteroid on the x-axis.
+        """
         return self.__speed_x
 
-    def get_speed_y(self):
+    def get_speed_y(self) -> float:
+        """
+        this function returns the current speed of the asteroid on the y-axis.
+        """
         return self.__speed_y
 
-    def get_size(self):
+    def get_size(self) -> int:
+        """
+        this function returns the size of the asteroid.
+        """
         return self.__size

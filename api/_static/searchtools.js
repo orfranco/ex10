@@ -186,7 +186,7 @@ var Stemmer = function() {
       w = w.replace(re,"");
     }
 
-    // and turn initial Y back to y
+    // and turn initial Y back to __y
     if (firstch == "y")
       w = firstch.toLowerCase() + w.substr(1);
     return w;
