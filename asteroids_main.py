@@ -36,6 +36,16 @@ class GameRunner:
         # TODO: Your code goes here
         pass
 
+    def move_obj(self, obj):
+        delta_x = self.__screen_max_x - self.__screen_min_x
+        new_spot_x = self.__screen_min_x + (obj.get_x() + obj.get_speed_x()
+                                            - self.__screen_min_x) % delta_x
+        delta_y = self.__screen_max_y - self.__screen_min_y
+        new_spot_y = self.__screen_min_y + (obj.get_y() + obj.get_speed_y()
+                                            - self.__screen_min_y) % delta_y
+
+        obj.set_x = new_spot_x
+        obj.set_y = new_spot_y
 
 def main(amount):
     runner = GameRunner(amount)

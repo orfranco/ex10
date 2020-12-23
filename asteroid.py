@@ -25,3 +25,21 @@ class Asteroid:
         :return:
         """
         return (self.size * 10) - 5
+
+    def set_x(self, x):
+        self.x = x
+
+    def set_y(self, y):
+        self.y = y
+
+    def get_x(self):
+        return self.x
+
+    def get_y(self):
+        return self.y
+
+    def get_speed_x(self):
+        return self.speed_x
+
+    def get_speed_y(self):
+        return self.speed_y
