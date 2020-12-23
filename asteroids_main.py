@@ -1,5 +1,10 @@
 from screen import Screen
+from ship import Ship
+from asteroid import Asteroid
+from torpedo import Torpedo
 import sys
+import random
+
 
 DEFAULT_ASTEROIDS_NUM = 5
 
@@ -13,13 +18,18 @@ class GameRunner:
         self.__screen_max_y = Screen.SCREEN_MAX_Y
         self.__screen_min_x = Screen.SCREEN_MIN_X
         self.__screen_min_y = Screen.SCREEN_MIN_Y
+        self.__add_ship()
         # TODO:
         #  - add list(?) of asteroids with length = asteroids_amount
         #       and register each one using
         #       __screen.register_asteroid(asteroid, asteroid_size).
-        #  - initialize ship with random coords
-        #       and draw it using __screen.draw_ship(x,y,heading).
         #  - add user score (as a class variable?)
+
+    def __add_ship(self):
+        ship_x_cord = random.randint(self.__screen_min_x, self.__screen_max_x)
+        ship_y_cord = random.randint(self.__screen_min_y, self.__screen_max_y)
+        self.ship = Ship(ship_x_cord, ship_y_cord)
+        self.__screen.draw_ship(ship_x_cord, ship_y_cord, heading=0)
 
     def run(self):
         self._do_loop()
@@ -46,6 +56,7 @@ class GameRunner:
 
         obj.set_x = new_spot_x
         obj.set_y = new_spot_y
+
 
 def main(amount):
     runner = GameRunner(amount)
