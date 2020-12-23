@@ -24,7 +24,9 @@ class Torpedo:
         self.__life_time = TORPEDO_START_LIFE
 
     def get_radius(self) -> int:
-        # TODO: erase and update uses in main.
+        """
+        this function returns the radius of the torpedo.
+        """
         return self.RADIUS
 
     def set_x(self, x: float):

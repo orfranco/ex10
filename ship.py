@@ -25,9 +25,8 @@ class Ship:
         self.__health = SHIP_START_HEALTH
 
     def get_radius(self) -> float:
-        # TODO: erase and update uses in main.
         """
-        :return: The radius of the ship.
+        this function returns the radius of the ship.
         """
         return self.RADIUS
 
