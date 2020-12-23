@@ -38,6 +38,9 @@ class Ship:
         # TODO: add validation using exceptions
         self.heading += angle
 
+    def get_heading(self):
+        return self.heading
+
     def set_x(self, x):
         self.x = x
 

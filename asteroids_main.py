@@ -4,7 +4,7 @@ from asteroid import Asteroid
 from torpedo import Torpedo
 import sys
 import random
-
+import math
 
 DEFAULT_ASTEROIDS_NUM = 5
 ROTATE_LEFT = 7
@@ -49,6 +49,17 @@ class GameRunner:
         self.__screen.ontimer(self._do_loop, 5)
 
     def _game_loop(self):
+        if self.__screen.is_up_pressed():
+            self.accelerate_ship()
+        self.move_obj(self, self.ship)
+
+    def accelerate_ship(self):
+        cos_heading = math.cos(math.radians(self.ship.get_heading()))
+        new_speed_x = self.ship.get_speed_x() + cos_heading
+        new_speed_y = self.ship.get_speed_y() + cos_heading
+
+        self.ship.set_speed_x(new_speed_x)
+        self.ship.set_speed_y(new_speed_y)
         # change ship direction:
         if self.__screen.is_left_pressed():
             self.ship.set_heading(ROTATE_LEFT)
