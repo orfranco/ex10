@@ -89,8 +89,11 @@ class GameRunner:
                 self.__screen.unregister_torpedo(torpedo)
                 self.__torpedos.remove(torpedo)
 
-
     def _asteroid_handler(self):
+        """
+        TODO
+        :return:
+        """
         for asteroid in self.__asteroids:
             self._move_obj(asteroid)
             self.__screen.draw_asteroid(asteroid, asteroid.get_x(),
@@ -104,7 +107,7 @@ class GameRunner:
 
             for torpedo in self.__torpedos:
                 if asteroid.has_intersection(torpedo):
-                    self._split_asteroid(asteroid)
+                    self._split_asteroid(asteroid, torpedo)
                     self.__torpedos.remove(torpedo)
                     self.__screen.unregister_torpedo(torpedo)
                     self._increase_usr_points(asteroid.get_size())
@@ -119,8 +122,28 @@ class GameRunner:
 
         self.__screen.set_score(self.__score)
 
-    def _split_asteroid(self, asteroid):
-        pass
+    def _split_asteroid(self, asteroid, torpedo):
+        """
+        TODO
+        :param asteroid:
+        :param torpedo:
+        :return:
+        """
+        if asteroid.get_size() > 1:
+            new_size = asteroid.get_size() - 1
+            new_speed_x_1, new_speed_y_1 = \
+                asteroids_speed_after_split(asteroid, torpedo)
+            new_speed_x_2 = -1 * new_speed_x_1
+            new_speed_y_2 = -1 * new_speed_y_1
+
+            new_ast_1 = Asteroid(asteroid.get_x(), asteroid.get_y(), new_speed_x_1, new_speed_y_1, size=new_size)
+            new_ast_2 = Asteroid(asteroid.get_x(), asteroid.get_y(), new_speed_x_2, new_speed_y_2, size=new_size)
+            self.__asteroids += [new_ast_1, new_ast_2]
+            self.__screen.register_asteroid(new_ast_1, new_ast_1.get_size())
+            self.__screen.register_asteroid(new_ast_2, new_ast_2.get_size())
+
+            self.__screen.unregister_asteroid(asteroid)
+            self.__asteroids.remove(asteroid)
 
     def _ship_handler(self):
         """
@@ -139,7 +162,7 @@ class GameRunner:
                                 int(self.ship.get_y()),
                                 self.ship.get_heading())
 
-        # check if the ship life is 0.
+        # check if the ship life is 0:
         if not self.ship.get_health():
             pass  # TODO
 
@@ -174,6 +197,21 @@ class GameRunner:
 def main(amount):
     runner = GameRunner(amount)
     runner.run()
+
+
+def asteroids_speed_after_split(asteroid, torpedo):
+    """
+    TODO
+    :param asteroid:
+    :param torpedo:
+    :return:
+    """
+    old_speed_x, old_speed_y = asteroid.get_speed_x(), asteroid.get_speed_y()
+    old_speeds_root = math.sqrt((old_speed_x ** 2) + (old_speed_y ** 2))
+    new_speed_x = (torpedo.get_speed_x() + old_speed_x) / old_speeds_root
+    new_speed_y = (torpedo.get_speed_y() + old_speed_y) / old_speeds_root
+
+    return new_speed_x, new_speed_y
 
 
 if __name__ == "__main__":
