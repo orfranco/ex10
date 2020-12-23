@@ -58,3 +58,9 @@ class Ship:
 
     def get_speed_y(self):
         return self.speed_y
+
+    def set_speed_x(self, speed_x):
+        self.speed_x = speed_x
+
+    def set_speed_y(self, speed_y):
+        self.speed_y = speed_y

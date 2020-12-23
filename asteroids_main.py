@@ -35,7 +35,6 @@ class GameRunner:
         ship_x_cord = random.randint(self.__screen_min_x, self.__screen_max_x)
         ship_y_cord = random.randint(self.__screen_min_y, self.__screen_max_y)
         self.ship = Ship(ship_x_cord, ship_y_cord)
-        self.__screen.draw_ship(ship_x_cord, ship_y_cord, heading=0)
 
     def run(self):
         self._do_loop()
@@ -49,33 +48,47 @@ class GameRunner:
         self.__screen.ontimer(self._do_loop, 5)
 
     def _game_loop(self):
+        self.__ship_handler()
+
+    def __ship_handler(self):
+        # move_ship according to keys pressed
         if self.__screen.is_up_pressed():
             self.accelerate_ship()
-        self.move_obj(self, self.ship)
-
-    def accelerate_ship(self):
-        cos_heading = math.cos(math.radians(self.ship.get_heading()))
-        new_speed_x = self.ship.get_speed_x() + cos_heading
-        new_speed_y = self.ship.get_speed_y() + cos_heading
-
-        self.ship.set_speed_x(new_speed_x)
-        self.ship.set_speed_y(new_speed_y)
-        # change ship direction:
         if self.__screen.is_left_pressed():
             self.ship.set_heading(ROTATE_LEFT)
-        elif self.__screen.is_right_pressed():
+        if self.__screen.is_right_pressed():
             self.ship.set_heading(ROTATE_RIGHT)
+        self.move_obj(self.ship)
+        self.__screen.draw_ship(int(self.ship.get_x()),
+                                int(self.ship.get_y()),
+                                self.ship.get_heading())
+
+    def accelerate_ship(self):
+        """
+
+        :return:
+        """
+        cos_heading = math.cos(math.radians(self.ship.get_heading()))
+        sin_heading = math.sin(math.radians(self.ship.get_heading()))
+        new_speed_x = self.ship.get_speed_x() + cos_heading
+        new_speed_y = self.ship.get_speed_y() + sin_heading
+        self.ship.set_speed_x(new_speed_x)
+        self.ship.set_speed_y(new_speed_y)
 
     def move_obj(self, obj):
+        """
+
+        :param obj:
+        :return:
+        """
         delta_x = self.__screen_max_x - self.__screen_min_x
         new_spot_x = self.__screen_min_x + (obj.get_x() + obj.get_speed_x()
                                             - self.__screen_min_x) % delta_x
         delta_y = self.__screen_max_y - self.__screen_min_y
         new_spot_y = self.__screen_min_y + (obj.get_y() + obj.get_speed_y()
                                             - self.__screen_min_y) % delta_y
-
-        obj.set_x = new_spot_x
-        obj.set_y = new_spot_y
+        obj.set_x(new_spot_x)
+        obj.set_y(new_spot_y)
 
 
 def main(amount):
