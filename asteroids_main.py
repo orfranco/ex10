@@ -66,6 +66,15 @@ class GameRunner:
 
             # Create the asteroid and add it to the game:
             asteroid = Asteroid(ast_x, ast_y, ast_speed_x, ast_speed_y)
+            #  make sure the asteroid won't intersect with the ship on the
+            #  start of the game:
+            while asteroid.has_intersection(self.ship):
+                ast_x = random.randint(self.__screen_min_x,
+                                       self.__screen_max_x)
+                ast_y = random.randint(self.__screen_min_y,
+                                       self.__screen_max_y)
+                asteroid.set_x(ast_x)
+                asteroid.set_y(ast_y)
             self.__asteroids.append(asteroid)
 
             # Register the asteroid to the screen:
